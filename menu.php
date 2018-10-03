@@ -2,11 +2,13 @@
   function popup(path){
     var name=path.split(".")[0];
     $.get("resources/" + name + ".html", function(response){
+    console.log("resources/" + name + ".html");
+      var description=response.split("~")[1];
+      var price=parseInt(response.split("~")[0]);
       swal({
         title: name,
-        text: response,
         html:
-          response +
+          description +
           "<br><br>Amount<br><select id=\"amount\" class=\"selectoption\" ><option value=\"1\">1</option>"+
           "<option value=\"2\">2</option>"+
           "<option value=\"3\">3</option>"+
@@ -36,15 +38,17 @@
               for(var i=0; i<arr.length; i++){
                 if(arr[i][0]==path){
                   arr[i][1]=Math.min((parseInt(arr[i][1])+parseInt(result["value"][0])).toString(), 10);
+                  arr[i][2]=arr[i][1]*price;
                   exist=true;
                 }
               }
               if(!exist){
-                arr.push([path,result["value"][0]]);
+                arr.push([path,result["value"][0],price*parseInt(result["value"][0])]);
               }
+              console.log(arr);
               sessionStorage.setItem("order", JSON.stringify(arr));
             }else{
-              sessionStorage.setItem("order", JSON.stringify([[path,result["value"][0]]]));
+              sessionStorage.setItem("order", JSON.stringify([[path,result["value"][0],price*parseInt(result["value"][0])]]));
             }
           }else{
             login();
@@ -66,7 +70,8 @@
       for($j=0; $j<min(3,count($items)-$i*3-$j-2); $j++){
         $path=$items[$i*3+$j+2];
         $name=explode(".", $path)[0];
-        echo "<td><div class=\"menuitem\"  style=\"font-size:200%\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name . "</div></td>";
+        $price=explode("~", file_get_contents("./resources/".$name.".html"))[0];
+        echo "<td><div class=\"menuitem\"  style=\"font-size:200%\"  onclick=popup(\"" . $path . "\")><img src=\"img/menu/" . $path . "\"/>" . $name . "-NT$" . $price . "</div></td>";
       }
       echo "</tr>";
     }

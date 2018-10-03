@@ -24,6 +24,11 @@
       "</div>" +
       "</div>";
     }
+    var price=0;
+    for(i=0; i<arr.length; i++){
+      price+=arr[i][2];
+    }
+    document.getElementById("pricetext").innerHTML="total: "+price;
   }
   function deleteitem(path){
     arr = JSON.parse(sessionStorage.getItem("order"));
@@ -88,6 +93,7 @@
         title: "Send your order?",
         showCancelButton: true
       }).then(function(result){
+        console.log(JSON.stringify(arr));
         if(result.value){
           $.ajax({
             type: "POST",
@@ -102,9 +108,11 @@
               sessionStorage.removeItem("order");
               document.getElementById("deliverycontainer").innerHTML="";
               loadDelivery();
+              console.log(response);
             },
             failure: function(response){
               swal("fail");
+              console.log(response);
             }
           })
         }
@@ -116,8 +124,15 @@
 <div id="deliverycontainer">
 
 </div>
+
 <div id="checkout" onclick="checkout()">
+
   <div id="checkouttext">
     checkout
+  </div>
+</div>
+<div id="price">
+  <div id="pricetext">
+
   </div>
 </div>

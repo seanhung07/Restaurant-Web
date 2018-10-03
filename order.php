@@ -6,7 +6,12 @@
   session_start();
 
   echo $_POST["username"] . $_POST["foodarr"];
-  $order=new Order($_POST["username"]);
+  $price=0;
+
+  foreach(json_decode($_POST["foodarr"]) as $row){
+    $price+=intval($row[2]);
+  }
+  $order=new Order($_POST["username"], $price);
   $order->setFood(json_decode($_POST["foodarr"]));
   $order->addToDb();
 ?>

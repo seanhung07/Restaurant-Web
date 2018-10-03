@@ -19,9 +19,9 @@ class Order{
 
   private $food = array();
 
-  function __construct($username){
+  function __construct($username, $price){
     $db = new Database();
-    $this->Oid = $db->addOrder($username);
+    $this->Oid = $db->addOrder($username, $price);
   }
 
   function addFood($name){
@@ -102,8 +102,8 @@ class Database{
   }
 
   //order
-  function addOrder($username){
-    $this->conn->query("INSERT INTO foodorder(username) VALUES('$username');");
+  function addOrder($username, $price){
+    $this->conn->query("INSERT INTO foodorder(username, price) VALUES('$username', '$price');");
     return $this->conn->insert_id;
   }
   function getOrders($username){
