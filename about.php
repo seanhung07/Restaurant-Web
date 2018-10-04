@@ -1,10 +1,10 @@
 <div id="mapcontainer">
   <div id="map"></div>
-  <div class="info" style="font-size:200%"><strong>Location: </strong>n/a</div>
+  <div class="info" style="font-size:200%"><strong>Core Value: </strong> The Right People, Enterprise, Energy, Performance</div>
+  <div class="info" style="font-size:200%"><strong>Location: </strong>No. 307, Section 1, Xinglong Road, Zhubei City, Hsinchu County, 302</div>
   <div class="info" style="font-size:200%"><strong>Phone: </strong>0987654321</div>
   <div class="info" style="font-size:200%"><strong>Open: </strong>9:00am</div>
   <div class="info" style="font-size:200%"><strong>Close: </strong>12:00pm</div>
-<div class="info" style="font-size:200%"><strong>Core Value: </strong> The Right People, Enterprise, Energy, Performance</div>
 
 </div>
 
